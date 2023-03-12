@@ -14,12 +14,12 @@ import (
 type Tickets []Ticket
 
 type Ticket struct {
-	id          string
-	nombre      string
-	email       string
-	paisDestino string
-	horaVuelo   time.Time
-	precio      float64
+	id                 string
+	name               string
+	email              string
+	destinationCountry string
+	flightTime         time.Time
+	price              float64
 }
 
 /* Methods */
@@ -36,7 +36,7 @@ func (t Tickets) GetPeopleAverageByDestination(destination string) float64 {
 	}
 
 	for _, ticket := range t {
-		if strings.ToLower(destination) == strings.ToLower(ticket.paisDestino) {
+		if strings.ToLower(destination) == strings.ToLower(ticket.destinationCountry) {
 			count++
 		}
 	}
@@ -76,12 +76,12 @@ func ReadFile(path string) (Tickets, error) {
 		}
 
 		newTicket := Ticket{
-			id:          row[0],
-			nombre:      row[1],
-			email:       row[2],
-			paisDestino: row[3],
-			horaVuelo:   horaV,
-			precio:      price,
+			id:                 row[0],
+			name:               row[1],
+			email:              row[2],
+			destinationCountry: row[3],
+			flightTime:         horaV,
+			price:              price,
 		}
 
 		allTickets = append(allTickets, newTicket)

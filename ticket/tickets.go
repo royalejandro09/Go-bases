@@ -16,7 +16,7 @@ func GetTicketByDestinationCount(destination string, data Tickets) (int, error) 
 	}
 
 	for _, ticket := range data {
-		if strings.ToLower(destination) == strings.ToLower(ticket.paisDestino) {
+		if strings.ToLower(destination) == strings.ToLower(ticket.destinationCountry) {
 			count++
 		}
 	}
@@ -39,7 +39,7 @@ func GetNumberOfPeopleTravelingBySchedule(data Tickets, start string, end string
 	endTime, _ := time.Parse("15:04", end)
 
 	for _, ticket := range data {
-		if ticket.horaVuelo.After(startTime) && ticket.horaVuelo.Before(endTime) {
+		if ticket.flightTime.After(startTime) && ticket.flightTime.Before(endTime) {
 			count++
 		}
 	}
