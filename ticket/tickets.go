@@ -2,30 +2,39 @@ package ticket
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"time"
 )
 
 // 1.Obtener la cantidad de tickets por destino.
-func GetTicketByDestinationCount(destination string, data Tickets) int {
+func GetTicketByDestinationCount(destination string, data Tickets) (int, error) {
 	count := 0
 
+	if data.GetLenght() == 0 {
+		log.Fatal("I cannot execute the method GetTicketByDestinationCount(), because the data is null")
+	}
+
 	for _, ticket := range data {
-		if ticket.paisDestino == destination {
+		if strings.ToLower(destination) == strings.ToLower(ticket.paisDestino) {
 			count++
 		}
-		//fmt.Println(row)
-		//fmt.Println(ticket)
 	}
+
 	fmt.Printf("La cantidad de tickets vendidos para %s es de %d", destination, count)
 	fmt.Println("")
-	return count
+	return count, nil
 }
 
 // 2. Cantidad de personas que viajan entre los rangos de horas()
-// madrugada (0 → 6),mañana (7 → 12), tarde (13 → 19), y noche (20 → 23).
-func GetTickestByEarlyMorningTrip(data Tickets, start string, end string) int {
+// madrugada ("00:00", "06:00"),mañana ("07:00", "12:00"), tarde ("13:00", "19:00"), y noche ("20:00", "23:00").
+func GetNumberOfPeopleTravelingBySchedule(data Tickets, start string, end string) (int, error) {
 	count := 0
+
+	if data.GetLenght() == 0 {
+		log.Fatal("I cannot execute the method GetNumberOfPeopleTravelingBySchedule(), because the data is null")
+	}
+
 	startTime, _ := time.Parse("15:04", start)
 	endTime, _ := time.Parse("15:04", end)
 
@@ -36,28 +45,5 @@ func GetTickestByEarlyMorningTrip(data Tickets, start string, end string) int {
 	}
 	fmt.Printf("La cantidad de personas que viajan entre las %s & %s horas son: %d", start, end, count)
 	fmt.Println("")
-	return count
-}
-
-func GetTickestByEarlyMorningTrip1(data string) int {
-	startTime, _ := time.Parse("15:04", "0:00")
-	endTime, _ := time.Parse("15:04", "6:00")
-	count := 0
-
-	rowTickets := strings.Split(data, "\n")
-
-	for _, ticket := range rowTickets {
-		row := strings.Split(ticket, ",")
-
-		timeTicket, _ := time.Parse("15:04", row[5])
-
-		if len(row) == 1 {
-			continue
-		} else if timeTicket.After(startTime) && timeTicket.Before(endTime) {
-			count++
-		}
-		//fmt.Println(row)
-		//fmt.Println(ticket)
-	}
-	return count
+	return count, nil
 }
