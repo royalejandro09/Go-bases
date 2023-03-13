@@ -42,9 +42,8 @@ func (t Tickets) GetPeopleAverageByDestination(destination string) float64 {
 	}
 
 	average := count / float64(len(t))
-
-	fmt.Printf("La cantidad promedio de personas que viajan a %s es de %f", destination, average)
-	fmt.Println("")
+	//fmt.Printf("La cantidad promedio de personas que viajan a %s es de %f", destination, average)
+	//fmt.Println("")
 	return average
 }
 

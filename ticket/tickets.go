@@ -1,7 +1,6 @@
 package ticket
 
 import (
-	"fmt"
 	"log"
 	"strings"
 	"time"
@@ -21,8 +20,8 @@ func GetTicketByDestinationCount(destination string, data Tickets) (int, error) 
 		}
 	}
 
-	fmt.Printf("La cantidad de tickets vendidos para %s es de %d", destination, count)
-	fmt.Println("")
+	//fmt.Printf("La cantidad de tickets vendidos para %s es de %d", destination, count)
+	//fmt.Println("")
 	return count, nil
 }
 
@@ -43,7 +42,7 @@ func GetNumberOfPeopleTravelingBySchedule(data Tickets, rangeTime [2]string) (in
 			count++
 		}
 	}
-	fmt.Printf("La cantidad de personas que viajan entre las %s & %s horas son: %d", rangeTime[0], rangeTime[1], count)
-	fmt.Println("")
+	//fmt.Printf("La cantidad de personas que viajan entre las %s & %s horas son: %d", rangeTime[0], rangeTime[1], count)
+	//fmt.Println("")
 	return count, nil
 }
