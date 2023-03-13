@@ -65,7 +65,7 @@ func ReadFile(path string) (Tickets, error) {
 	for _, ticket := range ticketsByRow {
 		row := strings.Split(ticket, ",")
 
-		horaV, errParse := time.Parse("15:04", row[4])
+		flightTime, errParse := time.Parse("15:04", row[4])
 		if errParse != nil {
 			log.Fatal(errParse)
 		}
@@ -80,7 +80,7 @@ func ReadFile(path string) (Tickets, error) {
 			name:               row[1],
 			email:              row[2],
 			destinationCountry: row[3],
-			flightTime:         horaV,
+			flightTime:         flightTime,
 			price:              price,
 		}
 
